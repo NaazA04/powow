@@ -1,10 +1,16 @@
+/**
+ * Pet Management Routes
+ * Handles CRUD operations for pets with filtering and search capabilities
+ * Public routes for browsing, admin-only routes for management
+ */
+
 import express from 'express';
 import Pet from '../models/Pet.js';
 import { authenticate, isAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Get all pets (public)
+// Get all pets with optional filtering by species, gender, and age
 router.get('/', async (req, res) => {
     try {
         const { species, gender, age } = req.query;

@@ -1,3 +1,9 @@
+/**
+ * Sound Context
+ * Provides audio feedback for user interactions using Web Audio API
+ * Manages sound preferences with localStorage persistence
+ */
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const SoundContext = createContext();
@@ -23,6 +29,7 @@ export const SoundProvider = ({ children }) => {
     // Web Audio API for generating simple sounds
     const audioContext = typeof window !== 'undefined' ? new (window.AudioContext || window.webkitAudioContext)() : null;
 
+    // Click sound for button interactions
     const playClickSound = () => {
         if (!soundEnabled || !audioContext) return;
 
@@ -42,6 +49,7 @@ export const SoundProvider = ({ children }) => {
         oscillator.stop(audioContext.currentTime + 0.1);
     };
 
+    // Success sound for completed actions
     const playSuccessSound = () => {
         if (!soundEnabled || !audioContext) return;
 
@@ -66,6 +74,7 @@ export const SoundProvider = ({ children }) => {
         });
     };
 
+    // Error sound for failed actions
     const playErrorSound = () => {
         if (!soundEnabled || !audioContext) return;
 

@@ -1,16 +1,17 @@
+/**
+ * User Profile Page
+ * Displays user information and adoption application history
+ */
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { ClipboardDocumentListIcon, CheckCircleIcon, XCircleIcon, ClockIcon } from '@heroicons/react/24/outline';
+
 import { useAuth } from '../../context/AuthContext';
-import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
-import {
-    ClipboardDocumentListIcon,
-    CheckCircleIcon,
-    XCircleIcon,
-    ClockIcon,
-} from '@heroicons/react/24/outline';
+import Card from '../../components/ui/Card';
 
 const UserProfile = () => {
     const { user } = useAuth();
@@ -27,14 +28,14 @@ const UserProfile = () => {
             const response = await axios.get('http://localhost:5001/api/adoptions/user');
             setApplications(response.data);
         } catch (error) {
-            console.error('Error fetching applications:', error);
-            // Mock data for demo
+            // Use mock data if API fails
             setApplications(getMockApplications());
         } finally {
             setLoading(false);
         }
     };
 
+    // Get status-specific icon for application status
     const getStatusIcon = (status) => {
         switch (status) {
             case 'approved':

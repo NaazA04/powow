@@ -1,10 +1,15 @@
+/**
+ * Authentication Routes
+ * Handles user registration and login with JWT token generation
+ */
+
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
 const router = express.Router();
 
-// Register
+// Register new user
 router.post('/register', async (req, res) => {
     try {
         const { name, email, password, phone, role } = req.body;

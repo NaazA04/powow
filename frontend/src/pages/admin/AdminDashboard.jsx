@@ -1,23 +1,28 @@
+/**
+ * Admin Dashboard Main header comment explaining admin dashboard with pet, application, and vet management features along with analytics
+ */
+
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
-import { useSound } from '../../context/SoundContext';
-import Card from '../../components/ui/Card';
-import Button from '../../components/ui/Button';
-import Modal from '../../components/ui/Modal';
-import Input from '../../components/ui/Input';
 import {
-    PlusIcon,
-    PencilIcon,
-    TrashIcon,
-    ClipboardDocumentListIcon,
-    CheckIcon,
-    XMarkIcon,
     ChartPieIcon,
     CheckBadgeIcon,
+    CheckIcon,
+    ClipboardDocumentListIcon,
+    PencilIcon,
+    PlusIcon,
+    TrashIcon,
+    XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+import { useSound } from '../../context/SoundContext';
+import Button from '../../components/ui/Button';
+import Card from '../../components/ui/Card';
+import Input from '../../components/ui/Input';
+import Modal from '../../components/ui/Modal';
 
 const AdminDashboard = () => {
     const { playSuccessSound, playErrorSound } = useSound();
@@ -76,7 +81,7 @@ const AdminDashboard = () => {
             setQuizStats(statsRes.data);
             setQuizResults(resultsRes.data);
         } catch (error) {
-            console.error('Error fetching data:', error);
+            // Use mock data if API fails
             setPets(getMockPets());
             setApplications(getMockApplications());
         } finally {
@@ -193,7 +198,7 @@ const AdminDashboard = () => {
         { label: 'Pending Apps', value: applications.filter((a) => a.status === 'pending').length, icon: '⏳' },
     ];
 
-    // Vet Management Functions
+    // Vet management functions for CRUD operations
     const handleAddVet = () => {
         setEditingVet(null);
         setVetFormData({

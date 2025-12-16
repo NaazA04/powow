@@ -1,7 +1,12 @@
+/**
+ * Authentication Middleware
+ * JWT token verification and admin role authorization
+ */
+
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
-// Verify JWT token
+// Middleware to verify JWT token and authenticate user
 export const authenticate = async (req, res, next) => {
     try {
         const token = req.headers.authorization?.replace('Bearer ', '');
@@ -24,7 +29,7 @@ export const authenticate = async (req, res, next) => {
     }
 };
 
-// Check if user is admin
+// Middleware to verify admin role authorization
 export const isAdmin = (req, res, next) => {
     if (req.user.role !== 'admin') {
         return res.status(403).json({ message: 'Admin access required' });

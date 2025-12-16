@@ -1,3 +1,9 @@
+/**
+ * Authentication Context
+ * Manages user authentication state, login, registration, and JWT token handling
+ * Provides auth state and methods to all components via React Context
+ */
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
@@ -17,6 +23,7 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState(localStorage.getItem('token'));
 
+    // Initialize authentication state from stored token
     useEffect(() => {
         if (token) {
             try {
@@ -29,7 +36,6 @@ export const AuthProvider = ({ children }) => {
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                 }
             } catch (error) {
-                console.error('Invalid token:', error);
                 logout();
             }
         }

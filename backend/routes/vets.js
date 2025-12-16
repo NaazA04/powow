@@ -1,10 +1,16 @@
+/**
+ * Veterinarian Directory Routes
+ * Handles CRUD operations for vet profiles with search filtering
+ * Public routes for browsing, admin-only routes for management
+ */
+
 import express from 'express';
 import Vet from '../models/Vet.js';
 import { authenticate, isAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Get all vets (public)
+// Get all vets with optional filtering by city and specialization
 router.get('/', async (req, res) => {
     try {
         const { city, specialization } = req.query;

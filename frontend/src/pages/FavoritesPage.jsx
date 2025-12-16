@@ -1,10 +1,16 @@
+/**
+ * Favorites Page
+ * Displays user's favorited pets saved from browsing
+ */
+
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { HeartIcon } from '@heroicons/react/24/solid';
-import PetCard from '../components/pets/PetCard';
+
 import Button from '../components/ui/Button';
+import PetCard from '../components/pets/PetCard';
 
 const FavoritesPage = () => {
     const navigate = useNavigate();
@@ -30,7 +36,7 @@ const FavoritesPage = () => {
             const favoritePets = response.data.filter(pet => favoriteIds.includes(pet._id));
             setFavorites(favoritePets);
         } catch (error) {
-            console.error('Error loading favorites:', error);
+            // Silently handle error
         } finally {
             setLoading(false);
         }

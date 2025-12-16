@@ -1,3 +1,9 @@
+/**
+ * Quiz and Pet Matching Routes
+ * Handles quiz submission, pet matching algorithm, and statistics
+ * Matches users with pets based on lifestyle preferences and compatibility
+ */
+
 import express from 'express';
 import Pet from '../models/Pet.js';
 import QuizResult from '../models/QuizResult.js';
@@ -5,7 +11,7 @@ import { authenticate, isAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Get quiz statistics (admin only)
+// Get quiz statistics for admin analytics
 router.get('/admin/stats', authenticate, isAdmin, async (req, res) => {
     try {
         const results = await QuizResult.find();
@@ -33,7 +39,7 @@ router.get('/admin/stats', authenticate, isAdmin, async (req, res) => {
     }
 });
 
-// Get recent quiz results (admin only)
+// Get recent quiz results for admin review
 router.get('/admin/results', authenticate, isAdmin, async (req, res) => {
     try {
         const results = await QuizResult.find()
@@ -47,7 +53,11 @@ router.get('/admin/results', authenticate, isAdmin, async (req, res) => {
     }
 });
 
-// Quiz matching algorithm
+/**
+ * Pet Matching Algorithm
+ * Calculates compatibility score between user preferences and pet characteristics
+ * Considers home type, energy level, kids compatibility, experience, and size
+ */
 const calculateMatch = (answers, pet) => {
     let score = 0;
     let maxScore = 6;
@@ -87,7 +97,7 @@ const calculateMatch = (answers, pet) => {
     return (score / maxScore) * 100; // Return percentage
 };
 
-// Submit quiz and get recommendations
+// Submit quiz and get pet recommendations
 router.post('/', async (req, res) => {
     try {
         const answers = req.body;

@@ -1,20 +1,21 @@
+/**
+ * Pet Detail Page
+ * Displays detailed information about a specific pet and handles adoption applications
+ */
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import ImageCarousel from '../components/ui/ImageCarousel';
-import Button from '../components/ui/Button';
-import Modal from '../components/ui/Modal';
-import Input from '../components/ui/Input';
+import { CalendarIcon, HeartIcon, MapPinIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
+
 import { useAuth } from '../context/AuthContext';
 import { useSound } from '../context/SoundContext';
-import {
-    CalendarIcon,
-    HeartIcon,
-    MapPinIcon,
-    CheckCircleIcon,
-} from '@heroicons/react/24/outline';
+import Button from '../components/ui/Button';
+import ImageCarousel from '../components/ui/ImageCarousel';
+import Input from '../components/ui/Input';
+import Modal from '../components/ui/Modal';
 
 const PetDetailPage = () => {
     const { id } = useParams();
@@ -43,8 +44,7 @@ const PetDetailPage = () => {
             const response = await axios.get(`http://localhost:5001/api/pets/${id}`);
             setPet(response.data);
         } catch (error) {
-            console.error('Error fetching pet:', error);
-            // Mock data for demo
+            // Use mock data if API fails
             setPet(getMockPet(id));
         } finally {
             setLoading(false);

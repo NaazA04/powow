@@ -1,12 +1,19 @@
-import express from 'express';
-import mongoose from 'mongoose';
+/**
+ * PawWow Pet Adoption Portal - Backend Server
+ * Main Express server configuration with MongoDB connection
+ * Handles API routes for authentication, pets, adoptions, quiz, and vets
+ */
+
+// Core dependencies
 import cors from 'cors';
 import dotenv from 'dotenv';
+import express from 'express';
+import mongoose from 'mongoose';
 
-// Import routes
+// Route imports
+import adoptionRoutes from './routes/adoptions.js';
 import authRoutes from './routes/auth.js';
 import petRoutes from './routes/pets.js';
-import adoptionRoutes from './routes/adoptions.js';
 import quizRoutes from './routes/quiz.js';
 import vetRoutes from './routes/vets.js';
 
@@ -16,18 +23,18 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
+// Middleware - Enable CORS and JSON parsing
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// API Routes - Mount all route handlers
+app.use('/api/adoptions', adoptionRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/pets', petRoutes);
-app.use('/api/adoptions', adoptionRoutes);
 app.use('/api/quiz', quizRoutes);
 app.use('/api/vets', vetRoutes);
 
-// Root route
+// Root endpoint - API information
 app.get('/', (req, res) => {
     res.json({
         message: 'PetMatch API is running',
@@ -40,13 +47,13 @@ app.get('/', (req, res) => {
     });
 });
 
-// Error handling middleware
+// Global error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ message: 'Something went wrong!' });
 });
 
-// Connect to MongoDB
+// Database connection and server startup
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
         console.log('✅ Connected to MongoDB');

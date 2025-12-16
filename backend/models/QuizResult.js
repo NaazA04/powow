@@ -1,3 +1,9 @@
+/**
+ * Quiz Result Model
+ * Stores user responses and recommended pets from matching algorithm
+ * Tracks user preferences for analytics and history
+ */
+
 import mongoose from 'mongoose';
 
 const quizResultSchema = new mongoose.Schema({

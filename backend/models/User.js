@@ -1,5 +1,11 @@
-import mongoose from 'mongoose';
+/**
+ * User Model
+ * Defines user schema with authentication support
+ * Includes password hashing and comparison methods
+ */
+
 import bcrypt from 'bcryptjs';
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -29,14 +35,14 @@ const userSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-// Hash password before saving
+// Pre-save middleware to hash password before storing
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
     this.password = await bcrypt.hash(this.password, 10);
     next();
 });
 
-// Compare password method
+// Method to compare provided password with hashed password
 userSchema.methods.comparePassword = async function (candidatePassword) {
     return await bcrypt.compare(candidatePassword, this.password);
 };

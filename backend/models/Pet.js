@@ -1,3 +1,9 @@
+/**
+ * Pet Model
+ * Defines pet schema with adoption and quiz matching attributes
+ * Includes characteristics for matching users with compatible pets
+ */
+
 import mongoose from 'mongoose';
 
 const petSchema = new mongoose.Schema({
@@ -37,7 +43,7 @@ const petSchema = new mongoose.Schema({
     characteristics: [{
         type: String,
     }],
-    // Quiz matching attributes
+    // Quiz matching attributes for compatibility scoring
     energyLevel: {
         type: String,
         enum: ['low', 'medium', 'high'],

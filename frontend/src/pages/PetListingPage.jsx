@@ -1,10 +1,16 @@
+/**
+ * Pet Listing Page
+ * Browse and filter available pets with search and filter capabilities
+ */
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+
 import PetCard from '../components/pets/PetCard';
 import PetFilter from '../components/pets/PetFilter';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 const PetListingPage = () => {
     const [pets, setPets] = useState([]);
@@ -40,15 +46,15 @@ const PetListingPage = () => {
             const response = await axios.get('http://localhost:5001/api/pets');
             setPets(response.data);
         } catch (error) {
-            console.error('Error fetching pets:', error);
             toast.error('Failed to load pets');
-            // For demo purposes, use mock data if API fails
+            // Use mock data if API fails
             setPets(getMockPets());
         } finally {
             setLoading(false);
         }
     };
 
+    // Apply search and filter criteria to pet list
     const applyFilters = () => {
         let filtered = [...pets];
 

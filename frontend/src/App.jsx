@@ -1,24 +1,39 @@
+/**
+ * Main App Component
+ * Configures routing, authentication, and global providers
+ * Includes protected routes for authenticated and admin-only pages
+ */
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { SoundProvider } from './context/SoundContext';
 
+// Layout components
+import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-import LandingPage from './pages/LandingPage';
-import PetListingPage from './pages/PetListingPage';
-import PetDetailPage from './pages/PetDetailPage';
-import LoginPage from './pages/auth/LoginPage';
-import RegisterPage from './pages/auth/RegisterPage';
-import UserProfile from './pages/user/UserProfile';
+
+// Pages
 import AdminDashboard from './pages/admin/AdminDashboard';
+import FavoritesPage from './pages/FavoritesPage';
+import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/auth/LoginPage';
+import PetDetailPage from './pages/PetDetailPage';
+import PetListingPage from './pages/PetListingPage';
 import QuizPage from './pages/QuizPage';
 import QuizResultsPage from './pages/QuizResultsPage';
+import RegisterPage from './pages/auth/RegisterPage';
+import UserProfile from './pages/user/UserProfile';
 import VetDirectoryPage from './pages/VetDirectoryPage';
-import FavoritesPage from './pages/FavoritesPage';
-import Footer from './components/Footer';
 
 // Protected Route Component
+/**
+ * Protected Route Wrapper
+ * Ensures user authentication and optional admin authorization
+ * Redirects to login if not authenticated, to profile if non-admin accessing admin route
+ */
 const ProtectedRoute = ({ children, adminOnly = false }) => {
     const { isAuthenticated, isAdmin, loading } = useAuth();
 

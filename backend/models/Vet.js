@@ -1,3 +1,9 @@
+/**
+ * Veterinarian Model
+ * Defines schema for vet profiles in the directory
+ * Includes verification status for admin approval
+ */
+
 import mongoose from 'mongoose';
 
 const vetSchema = new mongoose.Schema({

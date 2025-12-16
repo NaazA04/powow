@@ -226,18 +226,22 @@ const LandingPage = () => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
-                            { name: 'Bella', age: '2 yrs', breed: 'Golden Retriever', loc: 'New York', img: '🐕' },
-                            { name: 'Luna', age: '1 yr', breed: 'Siamese Cat', loc: 'Brooklyn', img: '🐈' },
-                            { name: 'Max', age: '3 yrs', breed: 'Beagle', loc: 'Queens', img: '🐶' },
-                            { name: 'Charlie', age: '4 mos', breed: 'Mixed', loc: 'Jersey City', img: '🐕‍🦺' },
+                            { name: 'Bella', age: '2 yrs', breed: 'Golden Retriever', loc: 'New York', img: 'https://a-us.storyblok.com/f/1016262/5472x3648/33b730b0ba/adobestock_118021847.jpeg' },
+                            { name: 'Luna', age: '1 yr', breed: 'Siamese Cat', loc: 'Brooklyn', img: 'https://upload.wikimedia.org/wikipedia/commons/b/b9/%D0%A2%D0%B0%D0%B9%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%82_%D0%9B%D1%83%D0%BB%D0%B0%D0%BC%D0%B5%D0%B9_%D0%A2%D0%B0%D0%B9%D1%81%D0%BA%D0%B0%D1%8F_%D0%9B%D0%B5%D0%B3%D0%B5%D0%BD%D0%B4%D0%B0%2C_%D0%A7%D0%B5%D0%BC%D0%BF%D0%B8%D0%BE%D0%BD_%D0%BC%D0%B8%D1%80%D0%B0_%D0%BF%D0%BE_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B5_WCF%2C_%D0%BE%D0%BA%D1%80%D0%B0%D1%81_%D0%B1%D0%BB%D1%8E_%D0%BF%D0%BE%D0%B8%D0%BD%D1%82_01_%28cropped%29.jpg' },
+                            { name: 'Max', age: '3 yrs', breed: 'Beagle', loc: 'Queens', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAZrTtw4zIH3M36-sd7h2d6dqESSdnEhBuUg&s' },
+                            { name: 'Charlie', age: '4 mos', breed: 'Mixed', loc: 'Jersey City', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfL21AKoi1rqDVYLEKxhCO3cZcXKz6JzxTuQ&s' },
                         ].map((pet, index) => (
                             <motion.div
                                 key={index}
                                 whileHover={{ y: -10 }}
                                 className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 group"
                             >
-                                <div className="h-64 bg-gray-100 flex items-center justify-center text-6xl group-hover:scale-110 transition-transform duration-500">
-                                    {pet.img}
+                                <div className="h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                    <img
+                                        src={pet.img}
+                                        alt={pet.name}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    />
                                 </div>
                                 <div className="p-6">
                                     <div className="flex justify-between items-start mb-4">

@@ -1,19 +1,25 @@
+/**
+ * Vet Directory Page
+ * Browse and filter verified veterinarian professionals
+ */
+
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-    PhoneIcon,
-    EnvelopeIcon,
-    MapPinIcon,
-    CheckBadgeIcon,
-    FunnelIcon,
     BuildingOfficeIcon,
+    CheckBadgeIcon,
     ClockIcon,
+    EnvelopeIcon,
+    FunnelIcon,
+    MapPinIcon,
+    PhoneIcon,
     StarIcon
 } from '@heroicons/react/24/outline';
+
+import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import Input from '../components/ui/Input';
-import Button from '../components/ui/Button';
 import VetProfileModal from '../components/vets/VetProfileModal';
 
 const VetDirectoryPage = () => {
@@ -35,7 +41,7 @@ const VetDirectoryPage = () => {
             const response = await axios.get('http://localhost:5001/api/vets', { params });
             setVets(response.data);
         } catch (error) {
-            console.error('Error fetching vets:', error);
+            // Silently handle error
         } finally {
             setLoading(false);
         }

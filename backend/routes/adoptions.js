@@ -1,10 +1,16 @@
+/**
+ * Adoption Request Routes
+ * Handles adoption application submission, retrieval, and status updates
+ * Users can submit and view their applications, admins can manage all applications
+ */
+
 import express from 'express';
 import AdoptionRequest from '../models/AdoptionRequest.js';
 import { authenticate, isAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Submit adoption application (authenticated users)
+// Submit new adoption application
 router.post('/', authenticate, async (req, res) => {
     try {
         const application = new AdoptionRequest({

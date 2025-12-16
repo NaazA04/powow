@@ -1,3 +1,9 @@
+/**
+ * Adoption Request Model
+ * Defines schema for pet adoption applications
+ * Tracks application status workflow: pending -> approved/rejected
+ */
+
 import mongoose from 'mongoose';
 
 const adoptionRequestSchema = new mongoose.Schema({
