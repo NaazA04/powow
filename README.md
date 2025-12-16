@@ -1,4 +1,4 @@
-# 🐾 PawWow - Pet Adoption Platform
+# 🐾 Powow - Pet Adoption Platform
 
 ![React](https://img.shields.io/badge/React-18.2-blue) ![Node.js](https://img.shields.io/badge/Node.js-Express-green) ![MongoDB](https://img.shields.io/badge/MongoDB-Database-brightgreen) ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-cyan)
 
