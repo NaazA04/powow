@@ -16,6 +16,7 @@ const LoginPage = () => {
         email: '',
         password: '',
     });
+    const [role, setRole] = useState('adopter');
     const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
@@ -34,7 +35,11 @@ const LoginPage = () => {
         if (result.success) {
             playSuccessSound();
             toast.success('Welcome back!');
-            navigate('/pets');
+            if (result.user?.role === 'admin') {
+                navigate('/admin/dashboard');
+            } else {
+                navigate('/pets');
+            }
         } else {
             playErrorSound();
             toast.error(result.message);
@@ -44,31 +49,59 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center py-12 px-4">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="max-w-md w-full"
-            >
-                <div className="text-center mb-8">
-                    <div className="text-6xl mb-4">🐾</div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">
-                        Welcome Back to <span className="gradient-text">PetMatch</span>
-                    </h2>
-                    <p className="text-gray-600">Sign in to continue your adoption journey</p>
-                </div>
+        <div className="min-h-screen pt-20 pb-12 flex flex-col justify-center sm:px-6 lg:px-8 bg-[#FFFBF5]">
+            <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-white py-8 px-4 shadow-xl rounded-3xl sm:px-10 border border-[#8D6E63]/10"
+                >
+                    <div className="text-center mb-8">
+                        <div className="text-6xl mb-4">🐾</div>
+                        <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                            Welcome Back to <span className="text-[#8D6E63]">Powow</span>
+                        </h2>
+                        <p className="text-gray-600 mb-6">Sign in to continue your adoption journey</p>
 
-                <div className="glass-strong rounded-2xl p-8 shadow-xl">
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                        {/* Role Toggle (Visual only for Login) */}
+                        <div className="flex justify-center mb-6">
+                            <div className="bg-gray-100 p-1 rounded-xl flex items-center relative">
+                                <motion.div
+                                    className="absolute left-1 top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-lg shadow-sm"
+                                    animate={{
+                                        x: role === 'admin' ? '100%' : '0%'
+                                    }}
+                                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setRole('adopter')}
+                                    className={`relative z-10 px-6 py-2 rounded-lg text-sm font-semibold transition-colors ${role === 'adopter' ? 'text-[#8D6E63]' : 'text-gray-500'
+                                        }`}
+                                >
+                                    Adopter
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setRole('admin')}
+                                    className={`relative z-10 px-6 py-2 rounded-lg text-sm font-semibold transition-colors ${role === 'admin' ? 'text-[#8D6E63]' : 'text-gray-500'
+                                        }`}
+                                >
+                                    Admin
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                         <Input
                             label="Email Address"
                             type="email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            placeholder="your@email.com"
-                            icon={EnvelopeIcon}
                             required
+                            placeholder="you@example.com"
                         />
 
                         <Input
@@ -77,47 +110,63 @@ const LoginPage = () => {
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
-                            placeholder="••••••••"
-                            icon={LockClosedIcon}
                             required
+                            placeholder="••••••••"
                         />
 
-                        <Button type="submit" size="lg" loading={loading} className="w-full">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                                <input
+                                    id="remember-me"
+                                    name="remember-me"
+                                    type="checkbox"
+                                    className="h-4 w-4 text-[#8D6E63] focus:ring-[#8D6E63] border-gray-300 rounded"
+                                />
+                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                                    Remember me
+                                </label>
+                            </div>
+
+                            <div className="text-sm">
+                                <a href="#" className="font-medium text-[#8D6E63] hover:text-[#7a5e54]">
+                                    Forgot your password?
+                                </a>
+                            </div>
+                        </div>
+
+                        <Button
+                            type="submit"
+                            variant="primary"
+                            className="w-full !bg-[#8D6E63] hover:!bg-[#7a5e54] !text-white !rounded-xl !py-3 !text-lg !shadow-lg"
+                            isLoading={loading}
+                        >
                             Sign In
                         </Button>
                     </form>
 
-                    <div className="mt-6 text-center">
-                        <p className="text-gray-600">
-                            Don't have an account?{' '}
+                    <div className="mt-6">
+                        <div className="relative">
+                            <div className="absolute inset-0 flex items-center">
+                                <div className="w-full border-t border-gray-300" />
+                            </div>
+                            <div className="relative flex justify-center text-sm">
+                                <span className="px-2 bg-white text-gray-500">
+                                    New to Powow?
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="mt-6 text-center">
                             <Link
                                 to="/register"
-                                className="text-accent-600 hover:text-accent-700 font-semibold"
+                                className="font-medium text-[#8D6E63] hover:text-[#7a5e54]"
                             >
-                                Sign up
+                                Create an account
                             </Link>
-                        </p>
+                        </div>
                     </div>
-                </div>
-
-                {/* Demo Credentials */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                    className="mt-6 p-4 bg-blue-50 rounded-xl border-2 border-blue-200"
-                >
-                    <p className="text-sm text-blue-800 font-semibold mb-2">
-                        Demo Credentials:
-                    </p>
-                    <p className="text-sm text-blue-700">
-                        <strong>User:</strong> user@demo.com / password
-                    </p>
-                    <p className="text-sm text-blue-700">
-                        <strong>Admin:</strong> admin@demo.com / password
-                    </p>
                 </motion.div>
-            </motion.div>
+            </div>
         </div>
     );
 };

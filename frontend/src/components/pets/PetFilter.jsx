@@ -7,14 +7,7 @@ const PetFilter = ({ filters, setFilters, onReset }) => {
         setFilters(prev => ({ ...prev, [key]: value }));
     };
 
-    const speciesOptions = [
-        { value: '', label: 'All Species' },
-        { value: 'dog', label: '🐕 Dogs' },
-        { value: 'cat', label: '🐱 Cats' },
-        { value: 'bird', label: '🦜 Birds' },
-        { value: 'rabbit', label: '🐰 Rabbits' },
-        { value: 'other', label: '🐾 Other' },
-    ];
+
 
     const genderOptions = [
         { value: '', label: 'All Genders' },
@@ -55,30 +48,7 @@ const PetFilter = ({ filters, setFilters, onReset }) => {
                 )}
             </div>
 
-            {/* Species Filter */}
-            <div className="mb-6">
-                <label className="block text-sm font-semibold text-gray-700 mb-3">
-                    Species
-                </label>
-                <div className="space-y-2">
-                    {speciesOptions.map((option) => (
-                        <label
-                            key={option.value}
-                            className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/50 cursor-pointer transition-colors"
-                        >
-                            <input
-                                type="radio"
-                                name="species"
-                                value={option.value}
-                                checked={filters.species === option.value}
-                                onChange={(e) => handleFilterChange('species', e.target.value)}
-                                className="w-4 h-4 text-accent-600 focus:ring-accent-500"
-                            />
-                            <span className="text-gray-700">{option.label}</span>
-                        </label>
-                    ))}
-                </div>
-            </div>
+
 
             {/* Gender Filter */}
             <div className="mb-6">

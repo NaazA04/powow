@@ -160,10 +160,10 @@ const PetDetailPage = () => {
                                 <div className="mb-6">
                                     <span
                                         className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${pet.status === 'available'
-                                                ? 'bg-green-100 text-green-800'
-                                                : pet.status === 'pending'
-                                                    ? 'bg-yellow-100 text-yellow-800'
-                                                    : 'bg-gray-100 text-gray-800'
+                                            ? 'bg-green-100 text-green-800'
+                                            : pet.status === 'pending'
+                                                ? 'bg-accent-100 text-accent-800'
+                                                : 'bg-gray-100 text-gray-800'
                                             }`}
                                     >
                                         {pet.status?.charAt(0).toUpperCase() + pet.status?.slice(1)}
@@ -235,8 +235,8 @@ const PetDetailPage = () => {
                                 )}
 
                                 {pet.status === 'pending' && (
-                                    <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4 text-center">
-                                        <p className="text-yellow-800 font-semibold">
+                                    <div className="bg-accent-50 border-2 border-accent-200 rounded-xl p-4 text-center">
+                                        <p className="text-accent-800 font-semibold">
                                             Application Pending Review
                                         </p>
                                     </div>

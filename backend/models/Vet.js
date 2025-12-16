@@ -8,7 +8,11 @@ const vetSchema = new mongoose.Schema({
     photo: {
         type: String,
     },
-    specialization: {
+    specialization: [{
+        type: String,
+        required: true,
+    }],
+    clinicName: {
         type: String,
         required: true,
     },

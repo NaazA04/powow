@@ -53,6 +53,10 @@ const seedData = async () => {
                 experienceLevel: 'beginner',
                 size: 'large',
                 addedBy: demoAdmin._id,
+                images: [
+                    'https://images.unsplash.com/photo-1633722715463-d30f4f325e24?q=80&w=2574&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=2524&auto=format&fit=crop'
+                ]
             },
             {
                 name: 'Luna',
@@ -69,6 +73,10 @@ const seedData = async () => {
                 experienceLevel: 'beginner',
                 size: 'small',
                 addedBy: demoAdmin._id,
+                images: [
+                    'https://images.unsplash.com/photo-1567270671170-fdc10a5bf831?q=80&w=2574&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1617137599095-d0cb5dc64ca1?q=80&w=2574&auto=format&fit=crop'
+                ]
             },
             {
                 name: 'Charlie',
@@ -85,6 +93,9 @@ const seedData = async () => {
                 experienceLevel: 'beginner',
                 size: 'large',
                 addedBy: demoAdmin._id,
+                images: [
+                    'https://imgs.search.brave.com/vFlObh4FqTtMu-DY6dbG-QciNXgxr9FI08FPJyllOjs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTE4/MTA4MTE2My9waG90/by9sYWJyYWRvci1y/ZXRyaWV2ZXIuanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPTNn/bE5tMXMzdnNFWTh6/OFpMbm9JRzBtUzFy/UE1jV2VmRWdINnlf/M2VBNGM9'
+                ]
             },
             {
                 name: 'Bella',
@@ -101,6 +112,10 @@ const seedData = async () => {
                 experienceLevel: 'intermediate',
                 size: 'small',
                 addedBy: demoAdmin._id,
+                images: [
+                    'https://images.unsplash.com/photo-1513245543132-31f507417b26?q=80&w=2535&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1568152950566-c1bf43b4ab51?q=80&w=2574&auto=format&fit=crop'
+                ]
             },
             {
                 name: 'Rocky',
@@ -117,6 +132,10 @@ const seedData = async () => {
                 experienceLevel: 'advanced',
                 size: 'large',
                 addedBy: demoAdmin._id,
+                images: [
+                    'https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?q=80&w=2576&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1505628346881-b72e2780457f?q=80&w=2574&auto=format&fit=crop'
+                ]
             },
             {
                 name: 'Mittens',
@@ -133,6 +152,9 @@ const seedData = async () => {
                 experienceLevel: 'beginner',
                 size: 'medium',
                 addedBy: demoAdmin._id,
+                images: [
+                    'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=2566&auto=format&fit=crop'
+                ]
             },
             {
                 name: 'Tweety',
@@ -149,6 +171,9 @@ const seedData = async () => {
                 experienceLevel: 'beginner',
                 size: 'small',
                 addedBy: demoAdmin._id,
+                images: [
+                    'https://imgs.search.brave.com/5y2DP-jzCuSF-2LXB3Mxp-ta0ARhPZHHW81MACqEwBQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy84/Lzg5L1NlcmludXNf/Y2FuYXJpYV8tUGFy/cXVlX1J1cmFsX2Rl/bF9OdWJsbyxfR3Jh/bl9DYW5hcmlhLF9T/cGFpbl8tbWFsZS04/YS5qcGc'
+                ]
             },
             {
                 name: 'Polly',
@@ -165,6 +190,9 @@ const seedData = async () => {
                 experienceLevel: 'advanced',
                 size: 'small',
                 addedBy: demoAdmin._id,
+                images: [
+                    'https://primary.jwwb.nl/public/s/a/i/temp-gskcuxnnasyisyefemju/8deeeed2-7fd5-440a-a254-95a6deeed556-high.jpg'
+                ]
             },
             {
                 name: 'Thumper',
@@ -181,6 +209,9 @@ const seedData = async () => {
                 experienceLevel: 'beginner',
                 size: 'small',
                 addedBy: demoAdmin._id,
+                images: [
+                    'https://imgs.search.brave.com/ZYQcZuMqqCqgig0LmW9G0DOWuv08uZ7g2F8dR2lXtoo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTAz/MjA5NjY1L3Bob3Rv/L2EtcmFiYml0LWhv/bGxhbmQtbG9wLmpw/Zz9zPTYxMng2MTIm/dz0wJms9MjAmYz1o/cENISmF6Z2JBMHFW/YmZYaU9zd1g4YkxS/ZjREWEF6dFNoTmN3/dWVIQkNVPQ'
+                ]
             },
             {
                 name: 'Snowball',
@@ -197,6 +228,10 @@ const seedData = async () => {
                 experienceLevel: 'intermediate',
                 size: 'large',
                 addedBy: demoAdmin._id,
+                images: [
+                    'https://images.unsplash.com/photo-1555169062-013468b47731?q=80&w=2574&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1591382386627-349b692688ff?q=80&w=2574&auto=format&fit=crop'
+                ]
             },
             {
                 name: 'Buddy',
@@ -213,6 +248,9 @@ const seedData = async () => {
                 experienceLevel: 'beginner',
                 size: 'medium',
                 addedBy: demoAdmin._id,
+                images: [
+                    'https://imgs.search.brave.com/ioTYRV4uvQT9RXVzNm9iG-fvFpkFWbOC9eTXum-yXx4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZG9nc3Rlci5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjQv/MDMvYmVhZ2xlLWlu/LWRvd253YXJkLXBv/c2l0aW9uX2p1a2dy/YXBvbmdfU2h1dHRl/cnN0b2NrLmpwZw'
+                ]
             },
             {
                 name: 'Shadow',
@@ -229,6 +267,10 @@ const seedData = async () => {
                 experienceLevel: 'beginner',
                 size: 'medium',
                 addedBy: demoAdmin._id,
+                images: [
+                    'https://images.unsplash.com/photo-1573865526739-10659fec78a5?q=80&w=2515&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?q=80&w=2670&auto=format&fit=crop'
+                ]
             },
         ];
 
@@ -239,56 +281,60 @@ const seedData = async () => {
         await Vet.deleteMany({});
         const vets = [
             {
-                name: 'Dr. Sarah Johnson',
-                specialization: 'General Veterinary Medicine',
-                city: 'New York',
+                name: 'Dr. Rajesh Kumar',
+                specialization: ['General Veterinary Medicine'],
+                clinicName: 'Pet Care Clinic',
+                city: 'Mumbai',
                 experience: 12,
                 contact: {
-                    phone: '+1-555-0101',
-                    email: 'sarah.j@vetclinic.com',
+                    phone: '+91-98765-43210',
+                    email: 'rajesh.k@vetclinic.in',
                 },
                 availability: 'Mon-Fri: 9AM-6PM',
                 verified: true,
-                address: '123 Pet Care St, New York, NY 10001',
+                address: '123 Pet Care Lane, Bandra West, Mumbai, MH 400050',
             },
             {
-                name: 'Dr. Michael Chen',
-                specialization: 'Emergency & Critical Care',
-                city: 'Los Angeles',
+                name: 'Dr. Priya Sharma',
+                specialization: ['Emergency & Critical Care'],
+                clinicName: 'Delhi Emergency Vet',
+                city: 'Delhi',
                 experience: 8,
                 contact: {
-                    phone: '+1-555-0202',
-                    email: 'michael.c@emergency-vet.com',
+                    phone: '+91-98765-12345',
+                    email: 'priya.s@emergency-vet.in',
                 },
                 availability: '24/7 Emergency',
                 verified: true,
-                address: '456 Care Lane, Los Angeles, CA 90001',
+                address: '456 Care Road, Vasant Vihar, New Delhi, DL 110057',
             },
             {
-                name: 'Dr. Emily Rodriguez',
-                specialization: 'Surgery',
-                city: 'Chicago',
+                name: 'Dr. Amit Patel',
+                specialization: ['Surgery'],
+                clinicName: 'Bangalore Surgical Center',
+                city: 'Bangalore',
                 experience: 15,
                 contact: {
-                    phone: '+1-555-0303',
-                    email: 'emily.r@surgical-vet.com',
+                    phone: '+91-98765-67890',
+                    email: 'amit.p@surgical-vet.in',
                 },
                 availability: 'Tue-Sat: 8AM-4PM',
                 verified: true,
-                address: '789 Surgery Blvd, Chicago, IL 60007',
+                address: '789 Surgery Blvd, Indiranagar, Bangalore, KA 560038',
             },
             {
-                name: 'Dr. James Wilson',
-                specialization: 'Exotic Pets',
-                city: 'Miami',
+                name: 'Dr. Sneha Reddy',
+                specialization: ['Exotic Pets'],
+                clinicName: 'Chennai Exotics',
+                city: 'Chennai',
                 experience: 10,
                 contact: {
-                    phone: '+1-555-0404',
-                    email: 'james.w@exotic-vet.com',
+                    phone: '+91-98765-09876',
+                    email: 'sneha.r@exotic-vet.in',
                 },
                 availability: 'Mon-Thu: 10AM-5PM',
                 verified: false,
-                address: '321 Exotic Way, Miami, FL 33101',
+                address: '321 Exotic Way, Adyar, Chennai, TN 600020',
             },
         ];
 

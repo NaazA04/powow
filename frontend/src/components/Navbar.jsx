@@ -32,20 +32,42 @@ const Navbar = () => {
         return location.pathname === path;
     };
 
-    const navLinks = [
-        { to: '/', label: 'Home', icon: HomeIcon, public: true },
-        { to: '/pets', label: 'Browse Pets', icon: HeartIcon, public: true },
-        { to: '/favorites', label: 'Favorites', icon: HeartIcon, public: true },
+    const guestLinks = [
+        { to: 'how-it-works', label: 'How it Works', type: 'scroll' },
+        { to: 'featured-pets', label: 'Featured Pets', type: 'scroll' },
+        { to: 'quiz', label: 'Quiz', type: 'scroll' },
+        { to: 'vets', label: 'Vets', type: 'scroll' },
+        { to: 'testimonials', label: 'Testimonials', type: 'scroll' },
     ];
 
-    const userLinks = isAuthenticated
-        ? isAdmin
-            ? [{ to: '/admin/dashboard', label: 'Dashboard', icon: UserCircleIcon }]
-            : [{ to: '/profile', label: 'My Profile', icon: UserCircleIcon }]
-        : [];
+    const authLinks = [
+        ...(isAdmin ? [{ to: '/admin/dashboard', label: 'Dashboard', type: 'link' }] : []),
+        { to: '/profile', label: 'My Profile', type: 'link' },
+        { to: '/pets', label: 'Browse Pets', type: 'link' },
+        ...(!isAdmin ? [
+            { to: '/vets', label: 'Vets', type: 'link' },
+        ] : []),
+        ...(!isAdmin ? [
+            { to: '/favorites', label: 'Favorites', type: 'link' },
+            { to: '/quiz', label: 'Quiz', type: 'link' },
+        ] : []),
+    ];
+
+    const links = isAuthenticated ? authLinks : guestLinks;
+
+    const scrollToSection = (id) => {
+        if (location.pathname !== '/') {
+            navigate('/', { state: { scrollTo: id } });
+        } else {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    };
 
     return (
-        <nav className="glass-strong sticky top-0 z-30 border-b border-white/30">
+        <nav className="bg-[#FFFBF5] sticky top-0 z-30 border-b border-[#8D6E63]/10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
@@ -57,37 +79,32 @@ const Navbar = () => {
                         >
                             🐾
                         </motion.div>
-                        <span className="text-2xl font-bold gradient-text">PetMatch</span>
+                        <span className="text-2xl font-bold text-[#8D6E63]">Powow</span>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-6">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.to}
-                                to={link.to}
-                                className={`flex items-center gap-2 transition-colors font-medium ${isActive(link.to)
-                                    ? 'text-accent-600'
-                                    : 'text-gray-700 hover:text-accent-600'
-                                    }`}
-                            >
-                                <link.icon className="w-5 h-5" />
-                                {link.label}
-                            </Link>
-                        ))}
-
-                        {userLinks.map((link) => (
-                            <Link
-                                key={link.to}
-                                to={link.to}
-                                className={`flex items-center gap-2 transition-colors font-medium ${isActive(link.to)
-                                    ? 'text-accent-600'
-                                    : 'text-gray-700 hover:text-accent-600'
-                                    }`}
-                            >
-                                <link.icon className="w-5 h-5" />
-                                {link.label}
-                            </Link>
+                    <div className="hidden md:flex items-center gap-8">
+                        {links.map((link) => (
+                            link.type === 'scroll' ? (
+                                <button
+                                    key={link.to}
+                                    onClick={() => scrollToSection(link.to)}
+                                    className="text-[#8D6E63] hover:text-[#7a5e54] font-medium transition-colors"
+                                >
+                                    {link.label}
+                                </button>
+                            ) : (
+                                <Link
+                                    key={link.to}
+                                    to={link.to}
+                                    className={`font-medium transition-colors ${isActive(link.to)
+                                        ? 'text-[#8D6E63] font-bold'
+                                        : 'text-gray-600 hover:text-[#8D6E63]'
+                                        }`}
+                                >
+                                    {link.label}
+                                </Link>
+                            )
                         ))}
                     </div>
 
@@ -96,7 +113,7 @@ const Navbar = () => {
                         {/* Sound Toggle */}
                         <button
                             onClick={toggleSound}
-                            className="p-2 text-gray-600 hover:text-accent-600 transition-colors"
+                            className="p-2 text-[#8D6E63] hover:text-[#7a5e54] transition-colors"
                             title={soundEnabled ? 'Mute sounds' : 'Enable sounds'}
                         >
                             {soundEnabled ? (
@@ -108,8 +125,8 @@ const Navbar = () => {
 
                         {isAuthenticated ? (
                             <div className="flex items-center gap-4">
-                                <span className="text-sm text-gray-600">
-                                    Hi, <span className="font-semibold text-gray-900">{user?.name}</span>
+                                <span className="text-sm text-[#8D6E63]">
+                                    Hi, <span className="font-semibold">{user?.name}</span>
                                 </span>
                                 <Button
                                     variant="outline"
@@ -126,6 +143,7 @@ const Navbar = () => {
                                     variant="secondary"
                                     size="sm"
                                     onClick={() => navigate('/login')}
+                                    className="!text-[#8D6E63] !border-[#8D6E63] hover:!bg-[#FFFBF5]"
                                 >
                                     Login
                                 </Button>
@@ -133,6 +151,7 @@ const Navbar = () => {
                                     variant="primary"
                                     size="sm"
                                     onClick={() => navigate('/register')}
+                                    className="!bg-[#8D6E63] !text-white hover:!bg-[#7a5e54]"
                                 >
                                     Sign Up
                                 </Button>
@@ -162,16 +181,31 @@ const Navbar = () => {
                         className="md:hidden py-4 border-t border-white/30"
                     >
                         <div className="flex flex-col gap-3">
-                            {[...navLinks, ...userLinks].map((link) => (
-                                <Link
-                                    key={link.to}
-                                    to={link.to}
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    className="flex items-center gap-2 text-gray-700 hover:text-accent-600 transition-colors font-medium px-2 py-2"
-                                >
-                                    <link.icon className="w-5 h-5" />
-                                    {link.label}
-                                </Link>
+                            {links.map((link) => (
+                                link.type === 'scroll' ? (
+                                    <button
+                                        key={link.to}
+                                        onClick={() => {
+                                            scrollToSection(link.to);
+                                            setMobileMenuOpen(false);
+                                        }}
+                                        className="flex items-center gap-2 text-gray-700 hover:text-[#8D6E63] transition-colors font-medium px-2 py-2 text-left"
+                                    >
+                                        {link.label}
+                                    </button>
+                                ) : (
+                                    <Link
+                                        key={link.to}
+                                        to={link.to}
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className={`flex items-center gap-2 transition-colors font-medium px-2 py-2 ${isActive(link.to)
+                                            ? 'text-[#8D6E63] font-bold'
+                                            : 'text-gray-700 hover:text-[#8D6E63]'
+                                            }`}
+                                    >
+                                        {link.label}
+                                    </Link>
+                                )
                             ))}
 
                             <div className="pt-3 border-t border-gray-200 space-y-3">

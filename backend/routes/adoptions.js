@@ -10,7 +10,7 @@ router.post('/', authenticate, async (req, res) => {
         const application = new AdoptionRequest({
             ...req.body,
             user: req.user._id,
-            petId: req.body.petId,
+            pet: req.body.petId,
         });
         await application.save();
         res.status(201).json(application);

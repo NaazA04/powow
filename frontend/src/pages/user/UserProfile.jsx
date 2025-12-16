@@ -41,8 +41,12 @@ const UserProfile = () => {
                 return <CheckCircleIcon className="w-6 h-6 text-green-600" />;
             case 'rejected':
                 return <XCircleIcon className="w-6 h-6 text-red-600" />;
+            case 'completed':
+                return <CheckCircleIcon className="w-6 h-6 text-green-600" />;
+            case 'cancelled':
+                return <XCircleIcon className="w-6 h-6 text-red-600" />;
             default:
-                return <ClockIcon className="w-6 h-6 text-yellow-600" />;
+                return <ClockIcon className="w-6 h-6 text-accent-600" />;
         }
     };
 
@@ -52,8 +56,10 @@ const UserProfile = () => {
                 return 'bg-green-100 text-green-800 border-green-200';
             case 'rejected':
                 return 'bg-red-100 text-red-800 border-red-200';
+            case 'pending':
+                return 'bg-accent-100 text-accent-800 border-accent-200';
             default:
-                return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+                return 'bg-accent-100 text-accent-800 border-accent-200';
         }
     };
 
@@ -83,6 +89,7 @@ const UserProfile = () => {
                                 </div>
                                 <h2 className="text-2xl font-bold text-gray-900">{user?.name}</h2>
                                 <p className="text-gray-600">{user?.email}</p>
+                                <p className="text-gray-500 text-sm mt-1">{user?.phone}</p>
                             </div>
 
                             <div className="space-y-3 border-t border-gray-200 pt-6">
@@ -105,93 +112,95 @@ const UserProfile = () => {
                     </div>
 
                     {/* Applications */}
-                    <div className="lg:col-span-2">
-                        <div className="flex items-center gap-3 mb-6">
-                            <ClipboardDocumentListIcon className="w-8 h-8 text-accent-600" />
-                            <div>
-                                <h2 className="text-2xl font-bold text-gray-900">
-                                    My Applications
-                                </h2>
-                                <p className="text-gray-600">Track your adoption requests</p>
-                            </div>
-                        </div>
-
-                        {loading ? (
-                            <div className="flex justify-center py-12">
-                                <div className="spinner"></div>
-                            </div>
-                        ) : applications.length === 0 ? (
-                            <Card>
-                                <div className="text-center py-12">
-                                    <div className="text-8xl mb-4">📋</div>
-                                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                                        No Applications Yet
-                                    </h3>
-                                    <p className="text-gray-600 mb-6">
-                                        Start browsing pets to find your perfect match!
-                                    </p>
-                                    <Button onClick={() => (window.location.href = '/pets')}>
-                                        Browse Pets
-                                    </Button>
+                    {user?.role !== 'admin' && (
+                        <div className="lg:col-span-2">
+                            <div className="flex items-center gap-3 mb-6">
+                                <ClipboardDocumentListIcon className="w-8 h-8 text-accent-600" />
+                                <div>
+                                    <h2 className="text-2xl font-bold text-gray-900">
+                                        My Applications
+                                    </h2>
+                                    <p className="text-gray-600">Track your adoption requests</p>
                                 </div>
-                            </Card>
-                        ) : (
-                            <div className="space-y-4">
-                                {applications.map((application, index) => (
-                                    <motion.div
-                                        key={application._id}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: index * 0.05 }}
-                                    >
-                                        <Card hover={false}>
-                                            <div className="flex items-start justify-between">
-                                                <div className="flex gap-4 flex-1">
-                                                    <div className="text-5xl">
-                                                        {application.pet?.species === 'dog' ? '🐕' : '🐱'}
-                                                    </div>
-                                                    <div className="flex-1">
-                                                        <h3 className="text-xl font-bold text-gray-900 mb-1">
-                                                            {application.pet?.name}
-                                                        </h3>
-                                                        <p className="text-gray-600 mb-3">
-                                                            {application.pet?.breed} • {application.pet?.age} years old
-                                                        </p>
-                                                        <div className="flex flex-wrap gap-2">
-                                                            <span
-                                                                className={`px-3 py-1 rounded-full text-sm font-semibold border-2 inline-flex items-center gap-2 ${getStatusColor(
-                                                                    application.status
-                                                                )}`}
-                                                            >
-                                                                {getStatusIcon(application.status)}
-                                                                {application.status?.charAt(0).toUpperCase() +
-                                                                    application.status?.slice(1)}
-                                                            </span>
-                                                            <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-                                                                Applied{' '}
-                                                                {new Date(application.createdAt).toLocaleDateString()}
-                                                            </span>
+                            </div>
+
+                            {loading ? (
+                                <div className="flex justify-center py-12">
+                                    <div className="spinner"></div>
+                                </div>
+                            ) : applications.length === 0 ? (
+                                <Card>
+                                    <div className="text-center py-12">
+                                        <div className="text-8xl mb-4">📋</div>
+                                        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                                            No Applications Yet
+                                        </h3>
+                                        <p className="text-gray-600 mb-6">
+                                            Start browsing pets to find your perfect match!
+                                        </p>
+                                        <Button onClick={() => (window.location.href = '/pets')}>
+                                            Browse Pets
+                                        </Button>
+                                    </div>
+                                </Card>
+                            ) : (
+                                <div className="space-y-4">
+                                    {applications.map((application, index) => (
+                                        <motion.div
+                                            key={application._id}
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: index * 0.05 }}
+                                        >
+                                            <Card hover={false}>
+                                                <div className="flex items-start justify-between">
+                                                    <div className="flex gap-4 flex-1">
+                                                        <div className="text-5xl">
+                                                            {application.pet?.species === 'dog' ? '🐕' : '🐱'}
+                                                        </div>
+                                                        <div className="flex-1">
+                                                            <h3 className="text-xl font-bold text-gray-900 mb-1">
+                                                                {application.pet?.name}
+                                                            </h3>
+                                                            <p className="text-gray-600 mb-3">
+                                                                {application.pet?.breed} • {application.pet?.age} years old
+                                                            </p>
+                                                            <div className="flex flex-wrap gap-2">
+                                                                <span
+                                                                    className={`px-3 py-1 rounded-full text-sm font-semibold border-2 inline-flex items-center gap-2 ${getStatusColor(
+                                                                        application.status
+                                                                    )}`}
+                                                                >
+                                                                    {getStatusIcon(application.status)}
+                                                                    {application.status?.charAt(0).toUpperCase() +
+                                                                        application.status?.slice(1)}
+                                                                </span>
+                                                                <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+                                                                    Applied{' '}
+                                                                    {new Date(application.createdAt).toLocaleDateString()}
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            {application.adminNotes && (
-                                                <div className="mt-4 pt-4 border-t border-gray-200">
-                                                    <p className="text-sm font-semibold text-gray-700 mb-1">
-                                                        Admin Notes:
-                                                    </p>
-                                                    <p className="text-sm text-gray-600">
-                                                        {application.adminNotes}
-                                                    </p>
-                                                </div>
-                                            )}
-                                        </Card>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
+                                                {application.adminNotes && (
+                                                    <div className="mt-4 pt-4 border-t border-gray-200">
+                                                        <p className="text-sm font-semibold text-gray-700 mb-1">
+                                                            Admin Notes:
+                                                        </p>
+                                                        <p className="text-sm text-gray-600">
+                                                            {application.adminNotes}
+                                                        </p>
+                                                    </div>
+                                                )}
+                                            </Card>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

@@ -49,7 +49,7 @@ const PetCard = ({ pet, onFavoriteChange }) => {
             case 'available':
                 return 'bg-green-100 text-green-800';
             case 'pending':
-                return 'bg-yellow-100 text-yellow-800';
+                return 'bg-accent-100 text-accent-800';
             case 'adopted':
                 return 'bg-gray-100 text-gray-800';
             default:

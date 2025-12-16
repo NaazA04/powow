@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
         const filter = {};
 
         if (city) filter.city = new RegExp(city, 'i');
-        if (specialization) filter.specialization = new RegExp(specialization, 'i');
+        if (specialization) filter.specialization = { $in: [new RegExp(specialization, 'i')] };
 
         const vets = await Vet.find(filter).sort({ verified: -1, name: 1 });
         res.json(vets);

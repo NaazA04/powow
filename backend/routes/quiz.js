@@ -1,9 +1,51 @@
 import express from 'express';
 import Pet from '../models/Pet.js';
 import QuizResult from '../models/QuizResult.js';
-import { authenticate } from '../middleware/auth.js';
+import { authenticate, isAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
+
+// Get quiz statistics (admin only)
+router.get('/admin/stats', authenticate, isAdmin, async (req, res) => {
+    try {
+        const results = await QuizResult.find();
+
+        const stats = {
+            totalQuizzes: results.length,
+            homeTypes: {},
+            experienceLevels: {},
+            activityLevels: {},
+            preferredSizes: {}
+        };
+
+        results.forEach(result => {
+            const { homeType, experience, activityLevel, preferredSize } = result.answers;
+
+            stats.homeTypes[homeType] = (stats.homeTypes[homeType] || 0) + 1;
+            stats.experienceLevels[experience] = (stats.experienceLevels[experience] || 0) + 1;
+            stats.activityLevels[activityLevel] = (stats.activityLevels[activityLevel] || 0) + 1;
+            stats.preferredSizes[preferredSize] = (stats.preferredSizes[preferredSize] || 0) + 1;
+        });
+
+        res.json(stats);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+});
+
+// Get recent quiz results (admin only)
+router.get('/admin/results', authenticate, isAdmin, async (req, res) => {
+    try {
+        const results = await QuizResult.find()
+            .populate('user', 'name email')
+            .populate('recommendedPets', 'name species breed')
+            .sort({ createdAt: -1 })
+            .limit(50);
+        res.json(results);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+});
 
 // Quiz matching algorithm
 const calculateMatch = (answers, pet) => {
