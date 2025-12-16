@@ -297,5 +297,3 @@ The application is fully responsive and optimized for:
 
 
 **Built with ❤️ and 🐾 to help pets find loving homes**
-
->>>>>>> 321408fc6de9254a7e9649bbce290b0659f36f51
